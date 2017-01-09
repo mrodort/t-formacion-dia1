@@ -13,18 +13,17 @@ public class Aplication {
 	    throw new IllegalArgumentException("Debe a menos indecar un parametro para el comando.");
 	}
 
-	final ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
 	File cvsFile = null;
 
 	switch (args[0]) {
 	case "city":
-	    cvsFile = new File(systemClassLoader.getResource("city.csv").getFile());
+	    cvsFile = ResourceUtils.getResourceByName("city.cvs");
 	    break;
 	case "country":
-	    cvsFile = new File(systemClassLoader.getResource("country.csv").getFile());
+	    cvsFile = ResourceUtils.getResourceByName("country.cvs");
 	    break;
 	case "language":
-	    cvsFile = new File(systemClassLoader.getResource("countrylanguage.csv").getFile());
+	    cvsFile = ResourceUtils.getResourceByName("countrylanguage.cvs");
 	    break;
 	default:
 	    throw new IllegalArgumentException("Argumento invalido, seleccione city, country o language");
