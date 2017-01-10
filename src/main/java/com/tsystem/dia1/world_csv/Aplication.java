@@ -10,6 +10,12 @@ import com.tsystem.dia1.world_csv.ui.ConsoleUserInterface;
 
 public class Aplication {
 
+    // Queremos hacer:
+    // 1 obtener city por id
+    // 2 obtener city por nombre empieza por
+    // 3 obtener country por codigo
+    // 4 ...
+
     public static void main(final String args[]) {
 
 	DataRepository dataRepository = new CsvDataRepository();
