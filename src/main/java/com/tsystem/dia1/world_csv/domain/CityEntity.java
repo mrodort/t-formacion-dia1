@@ -40,7 +40,7 @@ public class CityEntity {
 	return new CityEntityBuilder();
     }
 
-    private static class CityEntityBuilder {
+    public static class CityEntityBuilder {
 	private Long id;
 	private String name;
 	private String countryCode;

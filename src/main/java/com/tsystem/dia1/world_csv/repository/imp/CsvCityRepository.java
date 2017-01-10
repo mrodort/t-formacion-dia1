@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.tsystem.dia1.world_csv.domain.CityEntity;
+import com.tsystem.dia1.world_csv.mapper.CityMapper;
 import com.tsystem.dia1.world_csv.repository.CityRepository;
 
 import au.com.bytecode.opencsv.CSVReader;
@@ -17,19 +18,21 @@ public class CsvCityRepository implements CityRepository {
     private static final String CITY_FILE_NAME = "city.csv";
     private static final char COLUM_DELIMITER_CHAR = ';';
 
+    private final CityMapper mapper = new CityMapper();
+
     @Override
     public List<CityEntity> findByNameStartWith(String startWith) throws IOException, FileNotFoundException {
-	List<String[]> linesToReturn = new ArrayList<>();
+	List<CityEntity> cityToReturn = new ArrayList<>();
 	final CSVReader reader = new CSVReader(new FileReader(CITY_FILE_NAME), COLUM_DELIMITER_CHAR);
 
 	String[] nextLine;
 	while ((nextLine = reader.readNext()) != null) {
 	    if (nextLine[1].startsWith(startWith)) {
-		linesToReturn.add(nextLine);
+		cityToReturn.add(mapper.toCity(nextLine));
 	    }
 	}
 
-	return linesToReturn;
+	return cityToReturn;
     }
 
     @Override
@@ -39,7 +42,7 @@ public class CsvCityRepository implements CityRepository {
 	String[] nextLine;
 	while ((nextLine = reader.readNext()) != null) {
 	    if (nextLine[0].equals(id)) {
-		return Optional.of(nextLine);
+		return Optional.of(mapper.toCity(nextLine));
 	    }
 	}
 
