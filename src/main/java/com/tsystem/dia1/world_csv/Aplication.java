@@ -1,11 +1,11 @@
 package com.tsystem.dia1.world_csv;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
-import au.com.bytecode.opencsv.CSVReader;
+import repository.DataRepository;
+import userInterface.ConsoleUserInterface;
 
 public class Aplication {
 
@@ -35,10 +35,18 @@ public class Aplication {
 
 	    switch (args[1]) {
 	    case "id":
-		findById(cvsFile, args[2]);
+		Optional<String[]> optionalLine = DataRepository.findById(cvsFile, args[2]);
+
+		if (optionalLine.isPresent()) {
+		    ConsoleUserInterface.printLine(optionalLine.get());
+		}
+
 		break;
 	    case "name":
-		findByNameStartWith(cvsFile, args[2]);
+		List<String[]> lines = DataRepository.findByNameStartWith(cvsFile, args[2]);
+		for (String[] line : lines) {
+		    ConsoleUserInterface.printLine(line);
+		}
 		break;
 
 	    default:
@@ -47,31 +55,6 @@ public class Aplication {
 
 	} catch (Exception e) {
 	    e.printStackTrace();
-	}
-    }
-
-    private static void findByNameStartWith(final File fileName, final String startWith)
-	    throws IOException, FileNotFoundException {
-
-	final CSVReader reader = new CSVReader(new FileReader(fileName), ';');
-
-	String[] nextLine;
-	while ((nextLine = reader.readNext()) != null) {
-	    if (nextLine[1].startsWith(startWith)) {
-		System.out.println(nextLine[0] + " " + nextLine[1] + " etc...");
-	    }
-	}
-
-    }
-
-    private static void findById(final File fileName, final String id) throws IOException, FileNotFoundException {
-	final CSVReader reader = new CSVReader(new FileReader(fileName), ';');
-
-	String[] nextLine;
-	while ((nextLine = reader.readNext()) != null) {
-	    if (nextLine[0].equals(id)) {
-		System.out.println(nextLine[0] + " " + nextLine[1] + " etc...");
-	    }
 	}
     }
 }
