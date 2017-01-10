@@ -1,4 +1,4 @@
-package repository;
+package com.tsystem.dia1.world_csv.repository;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,9 +10,13 @@ import java.util.Optional;
 
 import au.com.bytecode.opencsv.CSVReader;
 
-public class DataRepository {
+public class CsvDataRepository implements DataRepository {
 
-    public static List<String[]> findByNameStartWith(final File fileName, final String startWith)
+    /* (non-Javadoc)
+     * @see repository.DataRepository#findByNameStartWith(java.io.File, java.lang.String)
+     */
+    @Override
+    public List<String[]> findByNameStartWith(final File fileName, final String startWith)
 	    throws IOException, FileNotFoundException {
 
 	List<String[]> linesToReturn = new ArrayList<>();
@@ -29,8 +33,11 @@ public class DataRepository {
 
     }
 
-    public static Optional<String[]> findById(final File fileName, final String id)
-	    throws IOException, FileNotFoundException {
+    /* (non-Javadoc)
+     * @see repository.DataRepository#findById(java.io.File, java.lang.String)
+     */
+    @Override
+    public Optional<String[]> findById(final File fileName, final String id) throws IOException, FileNotFoundException {
 	final CSVReader reader = new CSVReader(new FileReader(fileName), ';');
 
 	String[] nextLine;

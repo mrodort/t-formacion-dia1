@@ -1,4 +1,4 @@
-package userInterface;
+package com.tsystem.dia1.world_csv.ui;
 
 import java.util.Arrays;
 
