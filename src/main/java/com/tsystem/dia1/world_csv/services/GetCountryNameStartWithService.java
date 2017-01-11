@@ -10,7 +10,7 @@ public class GetCountryNameStartWithService {
 
     private final CountryRepository countryRepository = null;
 
-    public List<CountryEntity> getCityNameStartWith(String namePrefix) throws RepositoryConnectionExpection {
+    public List<CountryEntity> getCountryNameStartWith(String namePrefix) throws RepositoryConnectionExpection {
 
 	List<CountryEntity> countriesToReturn = countryRepository.findByNameStartWith(namePrefix);
 
