@@ -6,11 +6,11 @@ import com.tsystem.dia1.world_csv.domain.CountryLanguageEntity;
 import com.tsystem.dia1.world_csv.error.ElementNotFoundExpection;
 import com.tsystem.dia1.world_csv.error.RepositoryConnectionExpection;
 import com.tsystem.dia1.world_csv.repository.CountryLanguageRepository;
-import com.tsystem.dia1.world_csv.repository.imp.CsvCountryLanguageRepository;
+import com.tsystem.dia1.world_csv.repository.imp.MySQLCountryLanguageRepository;
 
 public class GetCountryLanguageByCountryCodeService {
 
-    private final CountryLanguageRepository countryLanguageRepository = new CsvCountryLanguageRepository();
+    private final CountryLanguageRepository countryLanguageRepository = new MySQLCountryLanguageRepository();
 
     public CountryLanguageEntity getCountryLanguageByCountryCode(final String countryCode)
 	    throws RepositoryConnectionExpection {

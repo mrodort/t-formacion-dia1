@@ -35,6 +35,12 @@ public class CountryLanguageEntity {
 	return new CountryLanguageEntityBuilder();
     }
 
+    @Override
+    public String toString() {
+	return "CountryLanguageEntity [countryCode=" + countryCode + ", language=" + language + ", isOfficial="
+		+ isOfficial + ", percentage=" + percentage + "]";
+    }
+
     public static class CountryLanguageEntityBuilder {
 
 	private String countryCode;

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.tsystem.dia1.world_csv.ResourceUtils;
 import com.tsystem.dia1.world_csv.domain.CityEntity;
 import com.tsystem.dia1.world_csv.error.RepositoryConnectionExpection;
 import com.tsystem.dia1.world_csv.mapper.CityMapper;
@@ -26,7 +27,8 @@ public class CsvCityRepository implements CityRepository {
 	List<CityEntity> cityToReturn = new ArrayList<>();
 	CSVReader reader = null;
 	try {
-	    reader = new CSVReader(new FileReader(CITY_FILE_NAME), COLUM_DELIMITER_CHAR);
+	    reader = new CSVReader(new FileReader(ResourceUtils.getResourceByName(CITY_FILE_NAME)),
+		    COLUM_DELIMITER_CHAR);
 	    String[] nextLine;
 	    while ((nextLine = reader.readNext()) != null) {
 		if (nextLine[1].startsWith(startWith)) {
@@ -39,7 +41,9 @@ public class CsvCityRepository implements CityRepository {
 	    throw new RepositoryConnectionExpection("Error en entrada salida", ioException);
 	} finally {
 	    try {
-		reader.close();
+		if (reader != null) {
+		    reader.close();
+		}
 	    } catch (IOException ioException) {
 		throw new RepositoryConnectionExpection("Error al cerrar", ioException);
 	    }
@@ -52,7 +56,8 @@ public class CsvCityRepository implements CityRepository {
     public Optional<CityEntity> findById(String id) throws RepositoryConnectionExpection {
 	CSVReader reader = null;
 	try {
-	    reader = new CSVReader(new FileReader(CITY_FILE_NAME), COLUM_DELIMITER_CHAR);
+	    reader = new CSVReader(new FileReader(ResourceUtils.getResourceByName(CITY_FILE_NAME)),
+		    COLUM_DELIMITER_CHAR);
 	    String[] nextLine;
 	    while ((nextLine = reader.readNext()) != null) {
 		if (nextLine[0].equals(id)) {
@@ -65,7 +70,9 @@ public class CsvCityRepository implements CityRepository {
 	    throw new RepositoryConnectionExpection("Error en entrada salida", ioException);
 	} finally {
 	    try {
-		reader.close();
+		if (reader != null) {
+		    reader.close();
+		}
 	    } catch (IOException ioException) {
 		throw new RepositoryConnectionExpection("Error al cerrar", ioException);
 	    }

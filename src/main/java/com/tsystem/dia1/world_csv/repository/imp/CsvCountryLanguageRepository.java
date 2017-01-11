@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Optional;
 
+import com.tsystem.dia1.world_csv.ResourceUtils;
 import com.tsystem.dia1.world_csv.domain.CountryLanguageEntity;
 import com.tsystem.dia1.world_csv.error.RepositoryConnectionExpection;
 import com.tsystem.dia1.world_csv.mapper.CountryLanguageMapper;
@@ -23,7 +24,8 @@ public class CsvCountryLanguageRepository implements CountryLanguageRepository {
     public Optional<CountryLanguageEntity> findByCountryCode(String countryCode) throws RepositoryConnectionExpection {
 	CSVReader reader = null;
 	try {
-	    reader = new CSVReader(new FileReader(CITY_FILE_NAME), COLUM_DELIMITER_CHAR);
+	    reader = new CSVReader(new FileReader(ResourceUtils.getResourceByName(CITY_FILE_NAME)),
+		    COLUM_DELIMITER_CHAR);
 	    String[] nextLine;
 	    while ((nextLine = reader.readNext()) != null) {
 		if (nextLine[0].equals(countryCode)) {
@@ -36,7 +38,9 @@ public class CsvCountryLanguageRepository implements CountryLanguageRepository {
 	    throw new RepositoryConnectionExpection("Error en entrada salida", ioException);
 	} finally {
 	    try {
-		reader.close();
+		if (reader != null) {
+		    reader.close();
+		}
 	    } catch (IOException ioException) {
 		throw new RepositoryConnectionExpection("Error al cerrar", ioException);
 	    }

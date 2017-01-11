@@ -1,5 +1,6 @@
 package com.tsystem.dia1.world_csv;
 
+import com.tsystem.dia1.world_csv.error.ElementNotFoundExpection;
 import com.tsystem.dia1.world_csv.error.RepositoryConnectionExpection;
 
 public class Aplication {
@@ -17,6 +18,8 @@ public class Aplication {
 	} catch (RepositoryConnectionExpection e) {
 	    System.err.println("Error al acceder al repositorio");
 	    e.printStackTrace();
+	} catch (ElementNotFoundExpection e) {
+	    System.out.println("No existe ningun elemente con ese identificador.");
 	}
     }
 }
