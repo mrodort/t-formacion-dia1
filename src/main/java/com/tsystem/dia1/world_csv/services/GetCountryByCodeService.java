@@ -6,10 +6,11 @@ import com.tsystem.dia1.world_csv.domain.CountryEntity;
 import com.tsystem.dia1.world_csv.error.ElementNotFoundExpection;
 import com.tsystem.dia1.world_csv.error.RepositoryConnectionExpection;
 import com.tsystem.dia1.world_csv.repository.CountryRepository;
+import com.tsystem.dia1.world_csv.repository.imp.HibernateCountryRepository;
 
 public class GetCountryByCodeService {
 
-    private final CountryRepository countryRepository = null;
+    private final CountryRepository countryRepository = new HibernateCountryRepository();
 
     public CountryEntity getCountryByCode(final String countryCode) throws RepositoryConnectionExpection {
 

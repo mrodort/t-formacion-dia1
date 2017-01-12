@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.tsystem.dia1.world_csv.domain.CountryEntity;
+import com.tsystem.dia1.world_csv.domain.HibernateCityEntity;
 
 public class HibernateUtil {
 
@@ -14,6 +15,7 @@ public class HibernateUtil {
 	try {
 	    sessionFactory = new Configuration()//
 		    .addAnnotatedClass(CountryEntity.class)//
+		    .addAnnotatedClass(HibernateCityEntity.class)//
 		    .buildSessionFactory();
 	} catch (Throwable ex) {
 	    throw new ExceptionInInitializerError(ex);

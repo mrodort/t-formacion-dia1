@@ -1,8 +1,13 @@
 package com.tsystem.dia1.world_csv.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -10,17 +15,17 @@ import javax.persistence.Table;
 public class CountryEntity {
 
     @Id
-    @Column(name = "Code")
+    @Column(name = "Code", columnDefinition = "CHAR", length = 3)
     private String code;
-    @Column(name = "Name")
+    @Column(name = "Name", columnDefinition = "CHAR", length = 52)
     private String name;
-    @Column(name = "Continent")
+    @Column(name = "Continent", columnDefinition = "ENUM")
     private String continent;
-    @Column(name = "Region")
+    @Column(name = "Region", columnDefinition = "CHAR", length = 26)
     private String region;
     @Column(name = "SurfaceArea")
     private Float surfaceArea;
-    @Column(name = "IndepYear")
+    @Column(name = "IndepYear", columnDefinition = "SMALLINT", length = 6)
     private Integer indepYear;
     @Column(name = "Population")
     private Integer population;
@@ -30,16 +35,19 @@ public class CountryEntity {
     private Float gnp;
     @Column(name = "GNPOld")
     private Float gnpOld;
-    @Column(name = "LocalName")
+    @Column(name = "LocalName", columnDefinition = "CHAR", length = 45)
     private String localName;
-    @Column(name = "GovernmentForm")
+    @Column(name = "GovernmentForm", columnDefinition = "CHAR", length = 45)
     private String governmentForm;
-    @Column(name = "HeadOfState")
+    @Column(name = "HeadOfState", columnDefinition = "CHAR", length = 60)
     private String headOfState;
     @Column(name = "Capital")
     private Integer capital;
-    @Column(name = "Code2")
+    @Column(name = "Code2", columnDefinition = "CHAR", length = 2)
     private String code2;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "countryCode")
+    private List<HibernateCityEntity> cities = new ArrayList<>();
 
     public String getCode() {
 	return code;
@@ -159,6 +167,23 @@ public class CountryEntity {
 
     public void setCode2(String code2) {
 	this.code2 = code2;
+    }
+
+    @Override
+    public String toString() {
+	return "CountryEntity [code=" + code + ", name=" + name + ", continent=" + continent + ", region=" + region
+		+ ", surfaceArea=" + surfaceArea + ", indepYear=" + indepYear + ", population=" + population
+		+ ", lifeExpectancy=" + lifeExpectancy + ", gnp=" + gnp + ", gnpOld=" + gnpOld + ", localName="
+		+ localName + ", governmentForm=" + governmentForm + ", headOfState=" + headOfState + ", capital="
+		+ capital + ", code2=" + code2 + "]";
+    }
+
+    public List<HibernateCityEntity> getCities() {
+	return cities;
+    }
+
+    public void setCities(List<HibernateCityEntity> cities) {
+	this.cities = cities;
     }
 
 }

@@ -11,7 +11,7 @@ import com.tsystem.dia1.world_csv.domain.CountryLanguageEntity;
 import com.tsystem.dia1.world_csv.error.RepositoryConnectionExpection;
 import com.tsystem.dia1.world_csv.repository.CountryLanguageRepository;
 
-public class MySQLCountryLanguageRepository implements CountryLanguageRepository {
+public class JdbcCountryLanguageRepository implements CountryLanguageRepository {
 
     private final MySQLConnectionFactory connectionFactory = new MySQLConnectionFactory();
 
